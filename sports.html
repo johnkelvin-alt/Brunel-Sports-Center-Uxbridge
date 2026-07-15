@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Brunel Sports Centre | Sports</title>
+<style>
+  :root {
+    --ink: #0B1F3A;
+    --ink-deep: #071527;
+    --amber: #E8622C;
+    --amber-soft: #F2895F;
+    --paper: #F5F3EE;
+    --steel: #8B96A5;
+  }
+
+  body { margin: 0;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.65; 
+}
+  h1, h2, h3 { font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--paper);
+  margin: 0;
+}
+  .label { font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+  a { color: inherit; }
+  img { max-width: 100%; display: block; }
+
+  nav { position: sticky;
+    top: 0; z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 40px;
+    background: rgba(11,31,58,0.88);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-mark { font-family: sans-serif; font-weight: 700; font-size: 1.25rem; text-transform: uppercase; letter-spacing: 0.04em; text-decoration: none; }
+  .nav-mark span { color: var(--amber); }
+  .nav-links { display: flex; gap: 32px; list-style: none; margin: 0; padding: 0; font-family: 'IBM Plex Mono', monospace; font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase; }
+  .nav-links a { text-decoration: none; color: var(--steel); transition: color 0.2s ease; }
+  .nav-links a:hover, .nav-links a.active { color: var(--paper); }
+  @media (max-width: 780px) { .nav-links { display: none; } }
+
+  .page-hero { padding: 80px 40px 50px; text-align: center; background: repeating-linear-gradient(0deg, transparent, transparent 39px, var(--line) 40px), repeating-linear-gradient(90deg, transparent, transparent 39px, var(--line) 40px), var(--ink); }
+  .page-hero h1 { font-size: clamp(2.4rem, 6vw, 4rem); margin-top: 16px; }
+  .page-hero p { max-width: 560px; margin: 20px auto 0; color: var(--steel); }
+
+  .games { max-width: 1080px; margin: 0 auto; padding: 60px 40px; display: flex; flex-direction: column; gap: 28px; }
+
+  .game-card { display: grid; grid-template-columns: 260px 1fr; gap: 0; border: 1px solid var(--line); background: var(--ink-deep); overflow: hidden; }
+  @media (max-width: 760px) { .game-card { grid-template-columns: 1fr; } }
+
+  .game-art { 
+    background:  var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px; }
+  .game-art svg { width: 42%; height: 42%; }
+
+  .game-body { padding: 30px 34px; }
+  .game-body .label { display: block; margin-bottom: 6px; }
+  .game-body h3 { font-size: 1.6rem; margin-bottom: 10px; }
+  .game-body p.desc { color: #D9D6CE; font-size: 0.95rem; margin: 0 0 18px; max-width: 640px; }
+
+  .game-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px; margin-bottom: 22px; }
+  .meta-item { border-left: 3px solid var(--amber); padding-left: 12px; }
+  .meta-item .label { margin-bottom: 3px; font-size: 0.68rem; }
+  .meta-item p { margin: 0; color: var(--steel); font-size: 0.85rem; }
+
+  .join-btn { display: inline-block; padding: 11px 26px; background: var(--amber); color: var(--ink-deep); font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; letter-spacing: 0.07em; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: background 0.2s ease, transform 0.2s ease; }
+  .join-btn:hover { background: var(--amber-soft); transform: translateY(-2px); }
+
+  .section-paper { background: var(--paper); color: var(--ink); padding: 90px 40px; }
+  .section-paper .inner { max-width: 1080px; margin: 0 auto; }
+  .section-paper .block-head { display: flex; align-items: baseline; gap: 18px; margin-bottom: 34px; border-bottom: 1px solid rgba(11,31,58,0.14); padding-bottom: 18px; }
+  .section-paper h2 { color: var(--ink); font-size: clamp(2rem, 5vw, 2.6rem); }
+
+  .testimonials { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+  .testimonial { background: #fff; border-left: 4px solid var(--amber); padding: 28px; }
+  .testimonial p.quote { margin: 0 0 16px; color: #2A2E38; font-size: 0.94rem; font-style: italic; }
+  .testimonial .who { font-family: monospace; font-size: 0.75rem; color: var(--ink); text-transform: uppercase; letter-spacing: 0.04em; }
+  .testimonial .who span { display: block; color: var(--amber); margin-top: 2px; }
+
+  footer { background: var(--ink-deep); padding: 50px 40px 24px; border-top: 1px solid var(--line); text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; color: var(--steel); }
+  footer p { margin: 4px 0; }
+</style>
+</head>
+
+<body>
+
+  <nav>
+    <a class="nav-mark" href="home.html">BRUNEL<span>/</span>SPORTS</a>
+    <ul class="nav-links">
+      <li><a href="Index.html">Home</a></li>
+      <li><a href="sports.html" class="active">Sports</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="payment.html">Payment</a></li>
+      <li><a href="membership.html">Membership</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header class="page-hero">
+    <span class="label">Team Brunel</span>
+    <h1>Sports at Brunel</h1>
+    <p>Explore the sports on offer, how to get involved, and what it takes to make the team.</p>
+  </header>
+
+  <section class="games">
+    <div class="game-card">
+      <div class="game-art"><img src="basketballClub.jpg" alt="basketballClub picture"></div>
+      <div class="game-body">
+        <span class="label">Team Sport</span>
+        <h3>Basketball</h3>
+        <p class="desc">Trains and competes in the Sports Hall with men's and women's squads at multiple levels of competition.</p>
+        <div class="game-meta">
+          <div class="meta-item"><span class="label">Sessions</span><p>Mon & Wed, 7-9pm (Sports Hall)*</p></div>
+          <div class="meta-item"><span class="label">Selection</span><p>Trial sessions run in September*</p></div>
+          <div class="meta-item"><span class="label">Level</span><p>Recreational to BUCS competitive</p></div>
+        </div>
+        <a class="join-btn" href="membership.html">Join Now</a>
+      </div>
+    </div>
+
+    <div class="game-card">
+      <div class="game-art"><img src="CyclingClub.jpg" alt="cyclying club picture"></div>
+      <div class="game-body">
+        <span class="label">Endurance</span>
+        <h3>Cycling</h3>
+        <p class="desc">Road and club rides for all abilities, from casual weekend group rides to structured training for competitive events.</p>
+        <div class="game-meta">
+          <div class="meta-item"><span class="label">Sessions</span><p>Sunday group rides, weekly*</p></div>
+          <div class="meta-item"><span class="label">Selection</span><p>Open membership, no trial*</p></div>
+          <div class="meta-item"><span class="label">Level</span><p>Casual to competitive</p></div>
+        </div>
+        <a class="join-btn" href="membership.html">Join Now</a>
+      </div>
+    </div>
+
+    <div class="game-card">
+      <div class="game-art"><img src="RugbyClub.jpg" alt="Rugby club picture"></div>
+      <div class="game-body">
+        <span class="label">Team Sport</span>
+        <h3>Rugby</h3>
+        <p class="desc">Competes on Brunel's international-standard pitch, with a strong Team Brunel tradition across multiple squads.</p>
+        <div class="game-meta">
+          <div class="meta-item"><span class="label">Sessions</span><p>Wed & Fri, 5-7pm (Sports Park)*</p></div>
+          <div class="meta-item"><span class="label">Selection</span><p>Pre-season trials in September*</p></div>
+          <div class="meta-item"><span class="label">Level</span><p>Recreational to BUCS competitive</p></div>
+        </div>
+        <a class="join-btn" href="membership.html">Join Now</a>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="section-paper">
+    <div class="inner">
+      <div class="block-head"><span class="label">Voices</span><h2>What Our Athletes Say</h2></div>
+      <div class="testimonials">
+        <div class="testimonial">
+          <p class="quote">"Joining Athletics in my first year gave me a routine, a team, and eventually a spot at BUCS Nationals - something I never expected when I first walked into trials."</p>
+          <div class="who">Award-winning student athlete<span>Athletics, Utibeimabasi</span></div>
+        </div>
+        <div class="testimonial">
+          <p class="quote">"Rugby at Brunel pushed me further than I thought possible. The coaching support around fixtures and training made all the difference to my development."</p>
+          <div class="who">Award-winning student athlete<span>Rugby, Khalid</span></div>
+        </div>
+        <div class="testimonial">
+          <p class="quote">"I came in with zero basketball experience. Two years later I was named Most Improved Player - the open trial system genuinely works."</p>
+          <div class="who">Award-winning student athlete<span>Basketball, Salman</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <p>Brunel University London - Kingston Lane, Uxbridge, Middlesex UB8 3PH</p>
+    <p>Tel: +44 (0)1895 274000 | &copy; Brunel Sports Centre</p>
+  </footer>
+
+</body>
+</html>

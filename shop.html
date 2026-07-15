@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Brunel Sport Shop</title>
+
+<style>
+  :root {
+    --ink:        #0B1F3A;
+    --ink-deep:   #071527;
+    --amber:      #E8622C;
+    --amber-soft: #F2895F;
+    --paper:      #F5F3EE;
+    --blueprint:  #3D5A80;
+    --steel:      #8B96A5;
+  }
+  
+  body {
+    margin: 0;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: sans-serif;
+    line-height: 1.65;
+  }
+
+  h1, h2, h3 {
+    font-family: sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--paper);
+    margin: 0;
+  }
+
+  .label {
+    font-family: monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--amber);
+  }
+
+  a { color: inherit; }
+  img { max-width: 100%; display: block; }
+
+  /* ---------- Nav ---------- */
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 40px;
+    background: rgba(11, 31, 58, 0.88);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nav-mark {
+    font-family: sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+  }
+
+  .nav-mark span { color: var(--amber); }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-family: monospace;
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--steel);
+  }
+
+  .nav-links a:hover, .nav-links a.active { color: var(--paper); }
+
+  @media (max-width: 720px) {
+    .nav-links { display: none; }
+  }
+
+  /* ---------- Shop hero ---------- */
+
+  .shop-hero {
+    position: relative;
+    padding: 90px 40px 70px;
+    background:
+      repeating-linear-gradient(0deg, transparent, transparent 39px, var(--line) 40px),
+      repeating-linear-gradient(90deg, transparent, transparent 39px, var(--line) 40px),
+      var(--ink);
+    text-align: center;
+  }
+
+  .shop-hero h1 {
+    font-size: clamp(2.6rem, 7vw, 4.5rem);
+    line-height: 0.95;
+    margin-top: 18px;
+  }
+
+  .shop-hero p {
+    max-width: 540px;
+    margin: 22px auto 0;
+    color: var(--steel);
+  }
+
+  /* ---------- Filters ---------- */
+
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    padding: 0 40px 60px;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+
+  .filter-btn {
+    font-family: monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--steel);
+    padding: 10px 20px;
+    border-radius: 2px;
+    cursor: pointer;
+    
+  }
+
+  .filter-btn:hover { border-color: var(--amber); color: var(--paper); }
+
+  .filter-btn.active {
+    background: var(--amber);
+    border-color: var(--amber);
+    color: var(--ink-deep);
+  }
+
+  /* ---------- Product grid ---------- */
+
+  .shop-grid {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 40px 100px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 26px;
+  }
+
+  .product-card {
+    background: var(--ink-deep);
+    border: 1px solid var(--line);
+    overflow: hidden;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .product-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--amber);
+  }
+
+  .product-thumb {
+    aspect-ratio: 4 / 3;
+    background:var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .product-thumb svg { width: 46%; height: 46%; opacity: 0.85; }
+
+  .product-info { padding: 20px 22px 24px; }
+
+  .product-info .label { display: block; margin-bottom: 8px; }
+
+  .product-info h3 {
+    font-size: 1.25rem;
+    margin-bottom: 6px;
+  }
+
+  .product-info p.desc {
+    color: var(--steel);
+    font-size: 0.88rem;
+    margin: 0 0 14px;
+  }
+
+  .price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .price-pair {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 14px;
+  }
+
+  .price-col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .price-label {
+    font-family: monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--steel);
+    margin-bottom: 2px;
+  }
+
+  .action-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .btn-buy, .btn-rent {
+    flex: 1;
+    text-align: center;
+    padding: 9px 0;
+    font-family: monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+  }
+
+  .btn-buy {
+    background: var(--amber);
+    color: var(--ink-deep);
+  }
+
+  .btn-buy:hover { background: var(--amber-soft); transform: translateY(-1px); }
+
+  .btn-rent {
+    background: transparent;
+    border: 1px solid var(--amber);
+    color: var(--amber);
+  }
+
+  .btn-rent:hover { background: rgba(232,98,44,0.1); transform: translateY(-1px); }
+
+  .price {
+    font-family: monospace;
+    font-size: 0.95rem;
+    color: var(--paper);
+  }
+
+  .price-note {
+    font-family: monospace;
+    font-size: 0.68rem;
+    color: var(--steel);
+    text-transform: uppercase;
+  }
+
+  /* ---------- CTA band ---------- */
+
+  .cta-band {
+    text-align: center;
+    padding: 90px 40px;
+    background: var(--ink-deep);
+    border-top: 1px solid var(--line);
+  }
+
+  .cta-band h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); }
+
+  .cta-band p {
+    color: var(--steel);
+    max-width: 480px;
+    margin: 16px auto 30px;
+  }
+
+  .cta {
+    display: inline-block;
+    padding: 14px 34px;
+    background: var(--amber);
+    color: var(--ink-deep);
+    font-family:monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    
+  }
+
+  .cta:hover { background: var(--amber-soft); transform: translateY(-2px); }
+
+  /* ---------- Footer ---------- */
+
+  footer {
+    background: var(--ink-deep);
+    padding: 40px 40px 30px;
+    border-top: 1px solid var(--line);
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--steel);
+  }
+</style>
+</head>
+
+<body>
+
+  <nav>
+    <a class="nav-mark" href="home.html">BRUNEL<span>/</span>SPORTS</a>
+    <ul class="nav-links">
+      <li><a href="Index.html">Home</a></li>
+      <li><a href="sports.html">Sports</a></li>
+      <li><a href="shop.html" class="active">Shop</a></li>
+      <li><a href="payment.html">Payment</a></li>
+      <li><a href="membership.html">Membership</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header class="shop-hero">
+    <span class="label">Official Team Brunel Merchandise</span>
+    <h1>Brunel Sport Shop</h1>
+    <p>Feel free to purchase or rent out sports Facilities</p>
+  </header>
+
+  <section class="shop-grid" id="shop-grid">
+
+    <div class="product-card" data-category="Equipment">
+      <div class="product-thumb"><img src="basketball.jpg" alt="Basketball image"></div>
+      <div class="product-info">
+        <span class="label">Equipment</span>
+        <h3>Basketball</h3>
+        <p class="desc">Durable basketbal quality.</p>
+        <div class="price-pair"><div class="price-col"><span class="price-label">Buy</span><span class="price">£28</span></div><div class="price-col"><span class="price-label">Rent</span><span class="price">£11</span></div></div><div class="action-row"><a class="btn-buy" href="payment.html?item=Brunel+Fleece&price=28&type=buy">Buy</a><a class="btn-rent" href="payment.html?item=Brunel+Fleece&price=11&type=rent">Rent</a></div>
+      </div>
+    </div>
+
+    <div class="product-card" data-category="Equipment">
+      <div class="product-thumb"><img src="NikeBall.png" alt="NikeBall image"></div>
+      <div class="product-info">
+        <span class="label">Equipment</span>
+        <h3>Football</h3>
+        <p class="desc">Premier League balls</p>
+        <div class="price-pair"><div class="price-col"><span class="price-label">Buy</span><span class="price">£28</span></div><div class="price-col"><span class="price-label">Rent</span><span class="price">£11</span></div></div><div class="action-row"><a class="btn-buy" href="payment.html?item=Dual+Gym+Shirt&price=28&type=buy">Buy</a><a class="btn-rent" href="payment.html?item=Dual+Gym+Shirt&price=11&type=rent">Rent</a></div>
+      </div>
+    </div>
+
+    <div class="product-card" data-category="Equipment">
+      <div class="product-thumb"><img src="Rugby.jpg" alt="Rugby image"></div>
+      <div class="product-info">
+        <span class="label">Equipment</span>
+        <h3>Rugby ball</h3>
+        <p class="desc">High quality for good grip.</p>
+        <div class="price-pair"><div class="price-col">
+          <span class="price-label">Buy</span>
+          <span class="price">£22</span></div>
+          <div class="price-col"><span class="price-label">Rent</span><span class="price">£9</span></div>
+        </div><div class="action-row"><a class="btn-buy" href="payment.html?item=Womens+Active+Shorts&price=22&type=buy">Buy</a><a class="btn-rent" href="payment.html?item=Womens+Active+Shorts&price=9&type=rent">Rent</a></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-band">
+    <h2>Buy or Rent</h2>
+    <p>Select Buy or Rent on any item above - you'll be taken straight to the payment page with the correct amount already applied.</p>
+  </div>
+
+  <footer>Brunel Sport Shop - Uxbridge Campus</footer>
+
+</body>
+</html>
